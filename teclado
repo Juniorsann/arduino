@@ -1,0 +1,19 @@
+#include <Keyboard.h>  // Biblioteca para emular o teclado
+
+const int botaoPin = 2; // Defina o pino para o botão
+int estadoBotao = 0;
+
+void setup() {
+  pinMode(botaoPin, INPUT_PULLUP); // Configura o botão com pull-up interno
+  Keyboard.begin();                // Inicializa a biblioteca do teclado
+}
+
+void loop() {
+  estadoBotao = digitalRead(botaoPin); // Lê o estado do botão
+
+  if (estadoBotao == LOW) {            // Se o botão for pressionado (LOW com pull-up interno)
+    Keyboard.press('a');               // Simula a tecla 'a'
+    delay(100);                        // Espera um tempo para evitar múltiplos registros da tecla
+    Keyboard.release('a');             // Solta a tecla
+  }
+}
